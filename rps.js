@@ -3,6 +3,8 @@ const ROCK = 'ROCK'
 const PAPER = 'PAPER'
 const SCISSORS = 'SCISSORS'
 
+const compSelect = computerPlay(1,3);
+
 function computerPlay (min, max) {
     let play;
     let compPlay;
@@ -19,95 +21,30 @@ function computerPlay (min, max) {
     return compPlay;
 }
 
-const compSelect = computerPlay(1,3);
+const tieGame = 'It is a tie. Play again!';
+const rockLose = 'You lose. Rock beats scissors.';
+const paperLose = 'You lose. Scissors beat paper.';
+const scissorsLose = 'You lose. Scissors beat paper.';
+const rockWin = 'You win! Rock beats scissors.';
+const paperWin = 'You win! Paper beats rock.';
+const scissorsWin = 'You win! Scissors beat paper.';
 
-/*function playRound (playerSelection, compSelect)  {
-    return compSelect === playerSelection ? 'T'
-    :  compSelect === 'ROCK' && playerSelection === 'SCISSORS' ? 'L'
-    :  compSelect === 'PAPER' && playerSelection === 'ROCK' ? 'L' 
-    :  compSelect === 'SCISSORS' && playerSelection === 'PAPER' ? 'L'
-    :  playerSelection === 'ROCK' && compSelect === 'SCISSORS' ? 'W'
-    :  playerSelection === 'PAPER' && compSelect === 'ROCK' ? 'W'
-    :  playerSelection === 'SCISSORS' && compSelect === 'PAPER' ? 'W'
-    :  'Invalid play. Please try again.'
-} */
-
+let playerSelection; //defined below in gameCount for loop from window.prompt
 
 function playRound (playerSelection, compSelect)  {
-    return compSelect === playerSelection ? 'It is a tie. Play again!'
-    :  compSelect === 'ROCK' && playerSelection === 'SCISSORS' ? 'You lose. Rock beats scissors.'
-    :  compSelect === 'PAPER' && playerSelection === 'ROCK' ? 'You lose. Paper beats rock.' 
-    :  compSelect === 'SCISSORS' && playerSelection === 'PAPER' ? 'You lose. Scissors beat paper.'
-    :  playerSelection === 'ROCK' && compSelect === 'SCISSORS' ? 'You win! Rock beats scissors.'
-    :  playerSelection === 'PAPER' && compSelect === 'ROCK' ? 'You win! Paper beats rock.'
-    :  playerSelection === 'SCISSORS' && compSelect === 'PAPER' ? 'You win! Scissors beat rock.'
+    return compSelect === playerSelection ? tieGame
+    :  compSelect === ROCK && playerSelection === SCISSORS ? rockLose
+    :  compSelect === PAPER && playerSelection === ROCK ? paperLose
+    :  compSelect === SCISSORS && playerSelection === PAPER ? scissorsLose
+    :  playerSelection === ROCK && compSelect === SCISSORS ? rockWin
+    :  playerSelection === PAPER && compSelect === ROCK ? paperWin
+    :  playerSelection === SCISSORS && compSelect === PAPER ? scissorsWin
     :  'Invalid play. Please try again.'
-} 
-
-
-/* fml forgot to pass the numbers 1,3 through computerPlay and wrote it again. Think if else is
-eaiser to read anyway
-
-function playRound (playerSelection, compSelect)  {
-    playerSelection = playerSelection.toUpperCase();
-    if (compSelect === playerSelection) {
-        return 'It is a tie. Play again!';
-    }
-    else if (compSelect === 'ROCK' && playerSelection === 'SCISSORS') {
-        return 'You lost. Rock beats scissors.';
-    }
-    else if (compSelect === 'PAPER' && playerSelection === 'ROCK') {
-        return 'You lost. Paper beats rock.';
-    }
-    else if (compSelect === 'SCISSORS' && playerSelection === 'PAPER') {
-        return 'You lost. Rock beats scissors.';
-    }
-    else if (playerSelection === 'ROCK' && compSelect === 'SCISSORS'){
-        return 'You win! Rock beats scissors.'; 
-    }
-    else if (playerSelection === 'PAPER' && compSelect === 'ROCK'){
-        return 'You win! Paper beats rock.'; 
-    }
-    else if (playerSelection === 'SCISSORS' && compSelect === 'SCISSORS'){
-        return 'You win! Scissor beat paper.'; 
-    }
-} */
-
-
-/* 
-const compSelect = computerPlay(1,3);
-const playerSelection = 'rock'; 
-console.log(playRound(playerSelection, compSelect));
-this was working. why can't game() see playRound?? scope stack hoist wtf? 
-need a whisky
-*/
-
+    }   
+    
 let playerWins = 0
 let computerWins = 0
 let ties = 0
-let playerSelection
-
-/* Could change the long strings in playRound to simple single characters. 
-   Could also declare global const RL PL SL RW PW SW = e.g. 'You lose. Rock beats scissors.' Use those to avoid time consuming spelling issues, fk. 
-   Use those within game()
-
-function game(playRound) { 
-    if (playRound === 'W') {
-        playerWins = playerWins + 1; 
-        console.log('You win!');
-    }
-    else if (playRound === 'L'){
-        computerWins = computerWins + 1;
-        console.log('You lose!')
-    }
-    else if (playRound === 'T') {
-        ties = ties + 1;
-        console.log('It\'s a tie.')
-    }
-    console.log('Player wins: ' + playerWins);
-    console.log('Computer wins: ' + computerWins);
-    console.log('Ties:' + ties);
-} */
 
 function game(playRound) { 
     if (playRound === 'You win! Rock beats scissors.' || playRound === 'You win! Paper beats rock.' || playRound === 'You win! Scissors beat rock.') {
@@ -131,6 +68,7 @@ for (let gameCount = 0; gameCount < 5; gameCount++){
     console.log('Round '+ (gameCount + 1));
     console.log(game(playRound(playerSelection, compSelect)));
 }  
+
 console.log('Final Results: ')
 if (playerWins > computerWins) {
     console.log('You win. Congrats.');
