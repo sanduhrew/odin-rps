@@ -27,7 +27,8 @@ const paperWin = 'You win! Paper beats rock.';
 const scissorsWin = 'You win! Scissors beat paper.';
 const invalid = 'Invalid play. Try again.'
 
-let playerSelection; //user defined below from window.prompt
+let compSelect;
+let playerSelection;
 
 function playRound (playerSelection, compSelect)  {
     if (compSelect === playerSelection) {
@@ -74,12 +75,12 @@ let roundWinner;
 
 function game() { 
     for (let gameCount = 0; gameCount < 5; gameCount++) {
-        playerPrompt = prompt('Enter RPS'); 
-        let compSelect = computerPlay(1,3);
-        let playerSelection = playerPrompt.toUpperCase();
-        console.log('// Round '+ (gameCount + 1)); 
+        let playerPrompt = prompt('Enter RPS'); 
+        compSelect = computerPlay(1,3);
+        playerSelection = playerPrompt.toUpperCase();
+        console.log('// Round ' + (gameCount + 1)); 
         console.log('Player choice: ' + playerSelection);
-        console.log('Computer choice: '+ compSelect); 
+        console.log('Computer choice: ' + compSelect); 
         roundWinner = playRound(playerSelection, compSelect);
         console.log(roundWinner); 
 
@@ -97,7 +98,7 @@ function game() {
         console.log('Ties:' + ties);
     } 
 
-    console.log('Final Results: ');
+    console.log('// Final Results: ');
     console.log('TOTAL Player wins: ' + playerWins);
     console.log('TOTAL Computer wins: ' + computerWins);
     console.log('Ties:' + ties);
